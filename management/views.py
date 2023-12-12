@@ -1,25 +1,50 @@
-from django.contrib.auth import login
-from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView
-from django.views.generic.edit import FormView
-from django.contrib.auth.forms import UserCreationForm 
+from django.shortcuts import render, HttpResponseRedirect, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
-class Base_Login(LoginView):
-    template_name = 'login.html'
-    fields = "__all__"
-    redirect_authenticated_user = True
 
-    def get_success_url(self):
-        return reverse_lazy('tasks')
+# authentication views
+@login_required
+def home(request):
+    return render(request, 'home.html')
 
-class Base_Register(FormView):
-    template_name = 'register.html'
-    form_class = UserCreationForm   # redering this form in register.html form.as_p
-    redirect_authenticated_user = True
-    success_url = reverse_lazy('tasks')
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
-    def form_valid(self, form):
-        user = form.save()
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(self.request, user)
-        return super(Base_Register, self).form_valid(form)
+            login(request, user)
+            return redirect('/')
+        else:
+            error_message = "Invalid username or password"
+            return render(request, 'login.html', {'error_message': error_message})
+        
+    return render(request, 'login.html')
+
+def user_signup(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        repeatPassword = request.POST['repeatPassword']
+
+        if password == repeatPassword:
+            try:
+                user = User.objects.create_user(username, email, password)
+                user.save()
+                login(request, user)
+                return redirect('/login')
+            except:
+                error_mesage = 'Error creating account'
+                return render(request, 'register.html', {'error_message' : error_mesage})
+        else:
+            error_mesage = 'Password do not match'
+            return render(request, 'blog_generator/signup.html', {'error_message' : error_mesage})
+    return render(request, 'register.html')
