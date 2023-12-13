@@ -2,9 +2,20 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
-
+from .models import Add
 # authentication views
+def add(request):
+    if request.method=='POST':
+        name=request.POST.get("name")
+        price=request.POST.get("price")
+        author=request.POST.get("author")
+        description=request.POST.get("description")
+        AddBooks=Add(name=name, price=price, author=author, description=description)
+        AddBooks.save()
+        
+    return render(request,'add.html')  
+
+
 @login_required
 def home(request):
     return render(request, 'home.html')
