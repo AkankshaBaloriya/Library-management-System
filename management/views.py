@@ -10,7 +10,8 @@ def add(request):
         price=request.POST.get("price")
         author=request.POST.get("author")
         description=request.POST.get("description")
-        AddBooks=Add(name=name, price=price, author=author, description=description)
+        image = request.FILES.get("image")
+        AddBooks=Add(name=name, price=price, author=author, description=description, image=image)
         AddBooks.save()
         
     return render(request,'add.html')  
