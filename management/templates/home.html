@@ -4,13 +4,8 @@
 {% if request.user.is_authenticated %}
 <nav class="p-4 text-white flex justify-between">
     <span class="navbar-brand mb-1"><h1>LIBRARY MANAGEMENT SYSTEM</h1></span>
-</nav>
-{% else %}
-<nav class="navbar">
-    <span class="navbar-brand mb-1"><h1>LIBRARY MANAGEMENT SYSTEM</h1></span>
     <div class="ml-auto">
-        <a class="btn btn-outline-light mr-2" href="{% url 'login' %}">Login</a>
-        <a class="btn btn-outline-light" href="{% url 'register'%}">Signup</a>
+        <a class="btn btn-outline-light mr-2" href="{% url 'logout' %}">Logout</a>
     </div>
 </nav>
 {% endif %}
