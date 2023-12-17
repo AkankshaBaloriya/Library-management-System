@@ -1,10 +1,10 @@
-{% extends "base.html" %}
-{%block home%}
+{% extends "home.html" %}
+{%block body%}
 <div class="container">
 <div class="p-9 m-4">
 <div class="col-lg-5 mx-auto">
-<form action="/add/" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
+<form action="/add/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="container bg-white flex-center p-4 border rounded ">
     <h3>Add Books</h3>
     <div class="mb-1 mt-4" >
