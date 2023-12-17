@@ -11,3 +11,8 @@ class Add(models.Model):
     def __str__(self):
         return self.name
     
+    @staticmethod
+    def showbook():
+        allbooks=Add.objects.all()
+        return allbooks
+    

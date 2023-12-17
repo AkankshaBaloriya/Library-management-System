@@ -19,7 +19,10 @@ def add(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    books=Add.showbook()
+    context={}
+    context["book"]=books
+    return render(request, 'home.html',context)
 
 def user_logout(request):
     logout(request)
