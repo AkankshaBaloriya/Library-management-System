@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Add
 # authentication views
+
 def add(request):
     if request.method=='POST':
         name=request.POST.get("name")
@@ -19,7 +20,10 @@ def add(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    books=Add.showbook()
+    context={}
+    context["book"]=books
+    return render(request, 'home.html',context)
 
 def user_logout(request):
     logout(request)
@@ -41,7 +45,7 @@ def user_login(request):
     return render(request, 'login.html')
 
 def user_signup(request):
-    if request.method == 'POST':
+    if request.method == 'POST': 
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
@@ -52,7 +56,7 @@ def user_signup(request):
                 user = User.objects.create_user(username, email, password)
                 user.save()
                 login(request, user)
-                return redirect('/login')
+                return redirect('login')
             except:
                 error_mesage = 'Error creating account'
                 return render(request, 'register.html', {'error_message' : error_mesage})

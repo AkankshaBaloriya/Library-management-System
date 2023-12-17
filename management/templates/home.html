@@ -9,6 +9,24 @@
     </div>
 </nav>
 {% endif %}
+    <div class="container-fluid col-lg-12 col-md-6 col-sm-3">
+        <div class="row">
+{%for i in book %}
+    <div class="card m-2 " style="width: 15rem;">
+        <img src="{{ i.image.url }}" class="card-img-top" alt="">
+        <div class="card-body">
+            <h5 class="card-title">{{ i.name }}</h5>
+            {% comment %} <p class="card-text">{{ i.price }}</p> {% endcomment %}
+            {% comment %} <p class="card-text">{{ i.author }}</p> {% endcomment %}
+            {% comment %} <p class="card-text">{{ i.description }}</p> {% endcomment %}
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+{% endfor %}    
+</div>
+</div>
+{% comment %} </div> {% endcomment %}
+{% comment %} </div> {% endcomment %}
 
 {% endblock home %}
 
