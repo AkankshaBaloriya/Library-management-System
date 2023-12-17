@@ -2,10 +2,10 @@
 
 {% block home %}
 {% if request.user.is_authenticated %}
-<nav class="p-4 text-white flex justify-between">
-    <span class="navbar-brand mb-1"><h1>LIBRARY MANAGEMENT SYSTEM</h1></span>
-    <div class="ml-auto">
-        <a class="btn btn-outline-light mr-2" href="{% url 'logout' %}">Logout</a>
+<nav class="navbar">
+    <span class="text-white m-3"><h1>LIBRARY MANAGEMENT SYSTEM</h1></span>
+    <div class="ml-auto m-3">
+        <a class="btn btn-outline-light" href="{% url 'logout' %}">Logout</a>
     </div>
 </nav>
 {% endif %}
