@@ -3,7 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Add
-# authentication views
+
+
+@login_required
 def add(request):
     if request.method=='POST':
         name=request.POST.get("name")

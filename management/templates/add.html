@@ -1,8 +1,20 @@
 {% extends "home.html" %}
 {%block home%}
+
+<style>
+  .container {
+    margin-top: 150px;
+  }
+</style>
+<nav class="navbar">
+  <div class="ml-auto m-3">
+      <a class="btn btn-outline-light" href="{% url 'home' %}">Go Back</a>
+  </div>
+</nav>
+
 <div class="container">
 <div class="p-9 m-4">
-<div class="col-lg-5 mx-auto">
+<div class="col-lg-5 mb-4 mx-auto ">
 <form action="/add/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container bg-white flex-center p-4 border rounded ">
