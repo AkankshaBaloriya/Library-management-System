@@ -16,3 +16,6 @@ class Add(models.Model):
         allbooks=Add.objects.all()
         return allbooks
     
+ 
+    
+    
