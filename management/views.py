@@ -15,9 +15,12 @@ def add(request):
         image = request.FILES.get("image")
         AddBooks=Add(name=name, price=price, author=author, description=description, image=image)
         AddBooks.save()
+        return HttpResponseRedirect('/')
         
-    return render(request,'add.html')  
+    return render(request,'add_book.html')  
 
+def book_details(request):
+    return render(request, 'book_details.html')
 
 @login_required
 def home(request):
